@@ -1,5 +1,5 @@
 --TSQL
-
+/*
 ---declaración de variables
 declare @idCliente int 
 
@@ -45,3 +45,16 @@ END CATCH
 
  print('soy otra consulta')
  print('yo también')
+ */
+
+ --CASE
+ 
+ declare @valor int 
+ declare @resultado char(10) =''
+ set @valor = 20 
+
+ set @resultado = (CASE WHEN @valor=10 THEN 'ROJO'
+                     WHEN @valor=20 THEN 'MORADO'
+					 WHEN @valor=30 THEN 'AMARILLO'
+					 ELSE 'GRIS'
+					 END)
