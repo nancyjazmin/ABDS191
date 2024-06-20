@@ -58,3 +58,9 @@ END CATCH
 					 WHEN @valor=30 THEN 'AMARILLO'
 					 ELSE 'GRIS'
 					 END)
+print @resultado
+
+select * ,(CASE WHEN disponibilidad= 1 THEN 'VERDE'
+                WHEN disponibilidad=0 THEN 'ROJO'
+				ELSE 'NEGRO' END)AS INDICADOR
+                FROM Inventario
