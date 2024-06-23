@@ -1,3 +1,6 @@
 
 comistore.mdf
 comistore_log.ldf
+PlataformaStreaming_log.ldf
+PlataformaStreaming.mdf
+Tablas.sql
