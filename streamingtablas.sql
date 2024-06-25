@@ -94,3 +94,31 @@ FechaVisualizacion DATETIME NOT NULL DEFAULT GETDATE(),
 FOREIGN KEY (UsuarioID) REFERENCES Usuarios(UsuarioID),
 FOREIGN KEY (PeliculaID) REFERENCES Peliculas(PeliculaID)
 );
+
+
+CREATE VIEW VistaGlobal AS
+SELECT 
+    u.UsuarioID,
+    u.Nombre AS NombreUsuario,
+    u.Email,
+    u.FechaRegistro,
+    s.SuscripcionID,
+    s.FechaInicio AS FechaInicioSuscripcion,
+    s.FechaFin AS FechaFinSuscripcion,
+    s.Tipo AS TipoSuscripcion,
+    p.PeliculaID,
+    p.Titulo AS TituloPelicula,
+    p.Genero AS GeneroPelicula,
+    p.FechaEstreno AS FechaEstrenoPelicula,
+    h.HistorialID,
+    h.FechaVisualizacion
+FROM 
+    Usuarios u
+LEFT JOIN 
+    Suscripciones s ON u.UsuarioID = s.UsuarioID
+LEFT JOIN 
+    HistorialVisualizacion h ON u.UsuarioID = h.UsuarioID
+LEFT JOIN 
+    Peliculas p ON h.PeliculaID = p.PeliculaID;
+
+	Select * from VistaGlobal;
