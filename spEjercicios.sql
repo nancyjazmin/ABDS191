@@ -55,3 +55,42 @@ EXEC EliminarHistorialVisualizacion @HistorialID ='3'
 
 SELECT * FROM HistorialVisualizacion;
 
+
+CREATE PROCEDURE sp_UsuariosYSuscripcion
+    @TipoSuscripcion NVARCHAR(50)
+AS
+BEGIN
+SELECT 
+U.UsuarioID,U.Nombre,S.Tipo
+FROM 
+Usuarios U
+INNER JOIN Suscripciones S ON U.UsuarioID = S.UsuarioID
+WHERE 
+S.Tipo =  @TipoSuscripcion;
+
+END;
+
+EXEC sp_UsuariosYSuscripcion @TipoSuscripcion = 'Premium'
+EXEC sp_UsuariosYSuscripcion @TipoSuscripcion = 'Standar'
+EXEC sp_UsuariosYSuscripcion @TipoSuscripcion = 'Premium'
+
+
+CREATE PROCEDURE sp_ConsultarUsuarioGenero
+    @UsuarioID INT,
+    @Genero NVARCHAR(50)
+AS
+BEGIN
+SELECT P.PeliculaID,P.Titulo,P.Genero,H.FechaVisualizacion
+FROM 
+HistorialVisualizacion H
+INNER JOIN Peliculas P ON H.UsuarioID =	P.PeliculaID
+WHERE
+H.UsuarioID = @UsuarioID
+AND P.Genero = @Genero
+END;
+
+SELECT * FROM Peliculas;
+
+EXEC sp_ConsultarUsuarioGenero @UsuarioID='6',@Genero='Drama'
+EXEC sp_ConsultarUsuarioGenero @UsuarioID='15',@Genero='Infantil'
+EXEC sp_ConsultarUsuarioGenero @UsuarioID='15',@Genero='Comedia'
