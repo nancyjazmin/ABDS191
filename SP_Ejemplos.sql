@@ -40,3 +40,20 @@ ORDER BY h.FechaVisualizacion DESC
 END;
 
 EXEC sp_ObtenerHistorial  1
+
+
+--SP para Insertar Peliculas 
+
+CREATE PROCEDURE sp_InsertarPeliculas
+@titulo NVARCHAR(100),
+@genero NVARCHAR(50),
+@fechaEstreno DATE
+AS
+BEGIN
+  INSERT INTO Peliculas (Titulo,Genero,FechaEstreno)
+  VALUES (@titulo,@genero,@fechaEstreno)
+END;
+
+EXEC sp_InsertarPeliculas @titulo='Intensamente 2',@genero='Infantil',@fechaEstreno='2024-06-13'
+
+SELECT * FROM Peliculas;
